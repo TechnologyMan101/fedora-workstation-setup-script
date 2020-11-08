@@ -4,7 +4,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "============================================="
-	echo " --- Fedora Workstation Setup Script 3.0 ---"
+	echo " --- Fedora Workstation Setup Script 3.1 ---"
 	echo "============================================="
 	echo "Supported Fedora Workstation Versions: 33"
 	echo "Script may prompt you or ask you for your password once in a while. Please monitor your computer until the script is done."
@@ -75,14 +75,18 @@ full () {
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
-	sudo dnf install -y ibus-mozc alien youtube-dl remmina bleachbit frozen-bubble asunder brasero k3b pavucontrol pulseeffects rhythmbox shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app chrome-gnome-shell lame gpart python3-speedtest-cli neofetch ffmpeg httrack tree audacity telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo pitivi sushi unoconv ffmpegthumbs gnome-books krita gnome-clocks gimp htop transmission curl git handbrake-gui minetest obs-studio VirtualBox discord java-latest-openjdk
+	sudo dnf install -y ibus-mozc alien youtube-dl remmina bleachbit frozen-bubble asunder brasero k3b pavucontrol pulseeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app chrome-gnome-shell lame gpart python3-speedtest-cli neofetch ffmpeg httrack tree audacity telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo pitivi sushi unoconv ffmpegthumbs gnome-books krita gnome-clocks gimp htop transmission curl git handbrake-gui minetest obs-studio VirtualBox discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins*
 	javamenu
 	sudo dnf upgrade -y
 	sudo dnf autoremove -y
 	flatpak install -y com.system76.Popsicle org.musescore.MuseScore com.spotify.Client  org.geogebra.GeoGebra us.zoom.Zoom com.mattermost.Desktop com.mojang.Minecraft
 	flatpak update -y
+	flatpak uninstall -y --unused --delete-data
 	echo "Adding current user to cdrom group..."
 	sudo usermod -aG cdrom $USER
+	gio mime text/calendar org.gnome.Calendar.desktop
+	echo "Adding enviromnent variable to fix functionality in Wayland..."
+	echo "export QT_QPA_PLATFORM=xcb" | sudo tee /etc/environment
 	finish
 }
 minimal () {
@@ -102,10 +106,14 @@ minimal () {
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
-	sudo dnf install -y ibus-mozc alien pavucontrol rhythmbox gparted p7zip* gnome-tweaks gnome-extensions-app gpart ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git
+	sudo dnf install -y ibus-mozc alien pavucontrol rhythmbox rhythmbox-alternative-toolbar gparted p7zip* gnome-tweaks gnome-extensions-app gpart ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins*
 	sudo dnf upgrade -y
 	sudo dnf autoremove -y
 	flatpak update -y
+	flatpak uninstall -y --unused --delete-data
+	gio mime text/calendar org.gnome.Calendar.desktop
+	echo "Adding enviromnent variable to fix functionality in Wayland..."
+	echo "export QT_QPA_PLATFORM=xcb" | sudo tee /etc/environment
 	finish
 }
 javamenu () {
