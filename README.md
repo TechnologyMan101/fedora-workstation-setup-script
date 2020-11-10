@@ -1,4 +1,4 @@
-# fedora-workstation-setup-script
+# Fedora Workstation Setup Script
 Bash script to set up a fresh install of Fedora Workstation.
 
 
