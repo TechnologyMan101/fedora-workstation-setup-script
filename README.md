@@ -1,11 +1,10 @@
 # Fedora Workstation Setup Script
 Bash script to set up a fresh install of Fedora Workstation.
 
-# This script is now being retired due to lack of use and testing. This script will no longer be maintained, although this script should still continue to function normally until at least Fedora Workstation 34. New features and fixes will no longer be made to this script.
 
 # Documentation
 
-Version 3.1
+Version 4.0
 
 Supported Fedora Workstation Versions: 33
 
@@ -15,7 +14,7 @@ Supported Fedora Workstation Versions: 33
 
 Please install .rpm files and files using other types of installation formats using files manually (if you have them).
 
-Please copy the Essential Font Pack from Extras at https://mega.nz/folder/cRZTkAJD#dV8CG6th0a-10Fu6yCG-5Q into `/usr/share/fonts/` Use `sudo nautilus` to open the file manager as root. This is required to perform these actions as this is modifying files on the system level. Before copying the font pack to the fonts folder, check that the folder permissions are all on “Create and delete files.”
+Please copy the Essential Font Pack from Extras at https://mega.nz/folder/sBwwxBTR#zf6d3UaJYnNGl5tXaN63ag into `/usr/share/fonts/` Use `sudo nautilus` to open the file manager as root. This is required to perform these actions as this is modifying files on the system level. Before copying the font pack to the fonts folder, check that the folder permissions are all on “Create and delete files.”
 
 Please add yourself to `vboxusers` using `sudo usermod -aG vboxusers $USER` and then reboot. Only do this if you have VirtualBox installed.
 
@@ -33,6 +32,14 @@ Add shortcut to open “gnome-system-monitor” with “Super+Backspace”
 Refer to image for media controls on desktop keyboards.
 
 
+# GNOME Extensions (from [extensions.gnome.org](https://extensions.gnome.org/)):
+
+This is to be done after running the script!!!
+
+- [Caffeine](https://extensions.gnome.org/extension/517/caffeine/)
+- [Lock Keys](https://extensions.gnome.org/extension/36/lock-keys/)
+
+
 # Run Script:
 
 Mark the script as executable by changing it in file properties or running `chmod +x /path/to/file`. Then run it in Terminal with `bash /path/to/file`
@@ -44,4 +51,4 @@ Mark the script as executable by changing it in file properties or running `chmo
 
 # VM Users
 
-Minimal Install is recommended. VM Tools can be found at  https://mega.nz/folder/cRZTkAJD#dV8CG6th0a-10Fu6yCG-5Q in Extras.
+Minimal Install is recommended. VM Tools can be found at  https://mega.nz/folder/sBwwxBTR#zf6d3UaJYnNGl5tXaN63ag in Extras.
