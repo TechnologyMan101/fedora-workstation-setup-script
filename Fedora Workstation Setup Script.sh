@@ -1,12 +1,62 @@
 #!/bin/bash
 # Start of Function Cluster
+checkcompatibility () {
+	# Set variables
+	. /etc/os-release
+	isfedora="false"
+	kernelarch=$(uname -m)
+	
+	# Check distro
+	if ! echo $PRETTY_NAME | grep -qi "Fedora Linux 35 (Workstation Edition)"
+	then
+		sysreqfail
+	fi
+	isfedora="true"
+
+	# Check for 35
+	if ! echo $VERSION_ID | grep -qi "35"
+	then
+		sysreqfail
+	fi
+	
+	# Check kernel architecture
+	if ! uname -m | grep -qi "x86_64"
+	then
+		sysreqfail
+	fi
+}
+sysreqfail () {
+	clear
+	tput setaf 9
+	echo "System requirements not met. This script supports the x86_64 version of Fedora 35 Workstation!!!"
+	tput setaf 3
+	echo "If your error is not caused by a wrong Fedora version or OS architecture, please check to see if I have published a script for your system."
+	tput setaf 10
+	echo "Your current distro is $PRETTY_NAME."
+	# Display Fedora codename if Fedora
+	if echo $isfedora | grep -qi "true"
+	then
+		echo "Your current Fedora version is $VERSION_ID."
+	fi
+	echo "Your current OS architecture is $kernelarch."
+	tput sgr0
+	echo "Hit any key to exit:"
+	IFS=""
+	read -sN1 answer
+	quitscript
+}
 mainmenu () {
 	clear
  	tput setaf 3
 	echo "============================================="
-	echo " --- Fedora Workstation Setup Script 3.1 ---"
+	echo " --- Fedora Workstation Setup Script 4.0 ---"
 	echo "============================================="
-	echo "Supported Fedora Workstation Versions: 33"
+	echo "Supported Fedora Workstation Versions (x86_64): 35"
+	tput setaf 10
+	echo "Your current distro is $PRETTY_NAME."
+	echo "Your current Fedora version is $VERSION_ID."
+	echo "Your current OS architecture is $kernelarch."
+	tput setaf 3
 	echo "Script may prompt you or ask you for your password once in a while. Please monitor your computer until the script is done."
 	echo "This script will show terminal output. This is normal."
 	echo "You can open this script in a text editor to see packages to be installed in detail."
@@ -22,15 +72,15 @@ mainmenu () {
 	tput setaf 9
 	echo "Press Q to quit"
 	tput sgr0
-	echo "Enter your selection followed by <return>:"
-	read answer
-	case "$answer" in
-		1) full;;
-		2) minimal;;
-		q) quitscript;;
-		Q) quitscript;;
+	echo "Enter your selection:"
+	IFS=""
+	read -sN1 answer
+	case $(echo "$answer" | tr A-Z a-z) in
+		1)	full;;
+		2)	minimal;;
+		q)	quitscript;;
+		*)	badoption;;
 	esac
-	badoption
 }
 quitscript () {
 	tput sgr0
@@ -75,18 +125,18 @@ full () {
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
-	sudo dnf install -y ibus-mozc alien youtube-dl remmina bleachbit frozen-bubble asunder brasero k3b pavucontrol pulseeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app chrome-gnome-shell lame gpart python3-speedtest-cli neofetch ffmpeg httrack tree audacity telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo pitivi sushi unoconv ffmpegthumbs gnome-books krita gnome-clocks gimp htop transmission curl git handbrake-gui minetest obs-studio VirtualBox discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins*
+	sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b pavucontrol pulseeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app chrome-gnome-shell lame gpart neofetch ffmpeg httrack tree audacity telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs gnome-books krita gnome-clocks gimp htop transmission curl git handbrake-gui minetest obs-studio VirtualBox discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip nextcloud-client shotcut
 	javamenu
 	sudo dnf upgrade -y
 	sudo dnf autoremove -y
-	flatpak install -y com.system76.Popsicle org.musescore.MuseScore com.spotify.Client  org.geogebra.GeoGebra us.zoom.Zoom com.mattermost.Desktop com.mojang.Minecraft
+	flatpak install -y flathub com.system76.Popsicle
+	flatpak install -y flathub org.musescore.MuseScore
+	flatpak install -y flathub com.mojang.Minecraft
 	flatpak update -y
 	flatpak uninstall -y --unused --delete-data
+	pip install pip youtube-dl yt-dlp speedtest-cli -U
 	echo "Adding current user to cdrom group..."
 	sudo usermod -aG cdrom $USER
-	gio mime text/calendar org.gnome.Calendar.desktop
-	echo "Adding enviromnent variable to fix functionality in Wayland..."
-	echo "export QT_QPA_PLATFORM=xcb" | sudo tee /etc/environment
 	finish
 }
 minimal () {
@@ -106,14 +156,12 @@ minimal () {
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
-	sudo dnf install -y ibus-mozc alien pavucontrol rhythmbox rhythmbox-alternative-toolbar gparted p7zip* gnome-tweaks gnome-extensions-app gpart ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins*
+	sudo dnf install -y alien pavucontrol rhythmbox rhythmbox-alternative-toolbar gparted p7zip* gnome-tweaks gnome-extensions-app gpart ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins* pip
 	sudo dnf upgrade -y
 	sudo dnf autoremove -y
 	flatpak update -y
 	flatpak uninstall -y --unused --delete-data
-	gio mime text/calendar org.gnome.Calendar.desktop
-	echo "Adding enviromnent variable to fix functionality in Wayland..."
-	echo "export QT_QPA_PLATFORM=xcb" | sudo tee /etc/environment
+	pip install pip speedtest-cli -U
 	finish
 }
 javamenu () {
@@ -124,8 +172,9 @@ javamenu () {
 	echo "============================"
 	echo "On the next screen, you will be prompted to select the default Java version. Please select the option with java-latest-openjdk."
 	tput sgr0
-	echo "Press <return> to continue"
-	read answer
+	echo "Press any key to continue"
+	IFS=""
+	read -sN1 answer
 	clear
 	sudo alternatives --config java
 	clear
@@ -137,6 +186,7 @@ javamenu () {
 # Start of Main Script
 while true
 do
+	checkcompatibility
 	mainmenu
 done
 # End of Main Script
