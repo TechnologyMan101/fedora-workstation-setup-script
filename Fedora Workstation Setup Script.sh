@@ -126,6 +126,7 @@ full () {
 	sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 	sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b pavucontrol pulseeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app chrome-gnome-shell lame gpart neofetch ffmpeg httrack tree audacity telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs gnome-books krita gnome-clocks gimp htop transmission curl git handbrake-gui minetest obs-studio VirtualBox discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip nextcloud-client shotcut google-chrome-stable
+	dnf copr enable gloriouseggroll/nobara-repos -y 
 	javamenu
 	sudo dnf upgrade -y
 	sudo dnf autoremove -y
@@ -134,7 +135,7 @@ full () {
 	flatpak install -y flathub com.mojang.Minecraft
 	flatpak update -y
 	flatpak uninstall -y --unused --delete-data
-	pip install pip youtube-dl yt-dlp speedtest-cli -U
+	pip install pip youtube-dl yt-dlp speedtest-cli protonup -U
 	echo "Adding current user to cdrom group..."
 	sudo usermod -aG cdrom $USER
 	finish
