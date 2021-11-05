@@ -12,6 +12,8 @@ Supported Fedora Workstation Versions: 35
 
 **The Extras folder also contains other tools you may want including font packs.**
 
+**Make sure to enable Third-Party Repositories during initial setup!!!**
+
 Please install .rpm files and files using other types of installation formats using files manually (if you have them).
 
 Please copy the Essential Font Pack from Extras at https://mega.nz/folder/sBwwxBTR#zf6d3UaJYnNGl5tXaN63ag into `/usr/share/fonts/` Use `sudo nautilus` to open the file manager as root. This is required to perform these actions as this is modifying files on the system level. Before copying the font pack to the fonts folder, check that the folder permissions are all on “Create and delete files.”
