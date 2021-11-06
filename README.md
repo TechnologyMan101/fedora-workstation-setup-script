@@ -4,7 +4,7 @@ Bash script to set up a fresh install of Fedora Workstation.
 
 # Documentation
 
-Version 4.2
+Version 4.3
 
 Supported Fedora Workstation Versions: 35
 
@@ -40,6 +40,7 @@ This is to be done after running the script!!!
 
 - [Caffeine](https://extensions.gnome.org/extension/517/caffeine/)
 - [Lock Keys](https://extensions.gnome.org/extension/36/lock-keys/)
+- [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/)
 
 
 # Run Script:
