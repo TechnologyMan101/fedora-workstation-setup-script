@@ -127,6 +127,9 @@ full () {
 	sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 	sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b pavucontrol pulseeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app chrome-gnome-shell lame gpart neofetch ffmpeg httrack tree audacity telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs gnome-books krita gnome-clocks gimp htop transmission curl git handbrake-gui minetest obs-studio discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip shotcut google-chrome-stable
 	javamenu
+	sudo dnf copr enable sentry/kernel-fsync 
+	sudo dnf copr enable gloriouseggroll/mesa-aco 
+	sudo dnf distro-sync -y
 	sudo dnf upgrade -y
 	sudo dnf autoremove -y
 	flatpak install -y flathub com.system76.Popsicle
