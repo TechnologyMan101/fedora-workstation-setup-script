@@ -49,7 +49,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "============================================="
-	echo " --- Fedora Workstation Setup Script 4.5 ---"
+	echo " --- Fedora Workstation Setup Script 4.6 ---"
 	echo "============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 35"
 	tput setaf 10
@@ -159,7 +159,7 @@ minimal () {
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
-	sudo dnf install -y alien pavucontrol rhythmbox rhythmbox-alternative-toolbar gparted p7zip* gnome-tweaks gnome-extensions-app gpart ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins* pip google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus
+	sudo dnf install -y alien pavucontrol rhythmbox rhythmbox-alternative-toolbar gparted p7zip* gnome-tweaks gnome-extensions-app gpart ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins* pip google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects
 	sudo dnf copr enable -y sentry/kernel-fsync 
 	sudo dnf copr enable -y gloriouseggroll/mesa-aco 
 	sudo dnf distro-sync -y
