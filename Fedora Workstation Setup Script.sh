@@ -48,9 +48,9 @@ sysreqfail () {
 mainmenu () {
 	clear
  	tput setaf 3
-	echo "============================================="
-	echo " --- Fedora Workstation Setup Script 4.6 ---"
-	echo "============================================="
+	echo "==============================================="
+	echo " --- Fedora Workstation Setup Script 4.6.1 ---"
+	echo "==============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 35"
 	tput setaf 10
 	echo "Your current distro is $PRETTY_NAME."
