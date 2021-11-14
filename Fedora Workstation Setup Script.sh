@@ -12,6 +12,14 @@ checkcompatibility () {
 		sysreqfail
 	fi
 	isfedora="true"
+	isworkstation="false"
+	
+	# Check workstation
+	if ! echo $PRETTY_NAME | grep -qi "Workstation"
+	then
+		sysreqfail
+	fi
+	isworkstation="true"
 
 	# Check for 35
 	if ! echo $VERSION_ID | grep -qi "35"
@@ -37,6 +45,7 @@ sysreqfail () {
 	if echo $isfedora | grep -qi "true"
 	then
 		echo "Your current Fedora version is $VERSION_ID."
+		echo "Fedora Edition is Workstation: $isworkstation"
 	fi
 	echo "Your current OS architecture is $kernelarch."
 	tput sgr0
@@ -48,13 +57,14 @@ sysreqfail () {
 mainmenu () {
 	clear
  	tput setaf 3
-	echo "==============================================="
-	echo " --- Fedora Workstation Setup Script 4.6.1 ---"
-	echo "==============================================="
+	echo "============================================="
+	echo " --- Fedora Workstation Setup Script 4.7 ---"
+	echo "============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 35"
 	tput setaf 10
 	echo "Your current distro is $PRETTY_NAME."
 	echo "Your current Fedora version is $VERSION_ID."
+	echo "Fedora Edition is Workstation: $isworkstation"
 	echo "Your current OS architecture is $kernelarch."
 	tput setaf 3
 	echo "Script may prompt you or ask you for your password once in a while. Please monitor your computer until the script is done."
