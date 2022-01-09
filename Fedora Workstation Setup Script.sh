@@ -58,7 +58,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 4.12 ---"
+	echo " --- Fedora Workstation Setup Script 4.13 ---"
 	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 35"
 	tput setaf 10
@@ -66,19 +66,23 @@ mainmenu () {
 	echo "Your current Fedora version is $VERSION_ID."
 	echo "Fedora Edition is Workstation: $isworkstation"
 	echo "Your current OS architecture is $kernelarch."
-	tput setaf 3
+tput setaf 3
 	echo "Script may prompt you or ask you for your password once in a while. Please monitor your computer until the script is done."
 	echo "This script will show terminal output. This is normal."
-	echo "You can open this script in a text editor to see packages to be installed in detail."
+	echo "You can open this script in a text editor to view all functions."
 	tput setaf 10
 	echo "You are encouraged to modify this script for your own needs."
 	tput setaf 9
 	echo "System will automatically reboot after the script is run!!!"
 	echo "It is not recommended to run this script more than once!!!"
+	tput setaf 10
+	echo "You may run this script again after an upgrade or to get your system up-to-date with the latest version of my script."
+	tput setaf 9
 	echo "Make sure you have a stable and fast Internet connection before proceeding!!!"
 	tput setaf 3
 	echo "Press 1 to perform a Full Install (All User Packages)"
 	echo "Press 2 to perform a Minimal Install (Essentials)"
+	echo "Press 3 to view instructions for setting up a multi-user system"
 	tput setaf 9
 	echo "Press Q to quit"
 	tput sgr0
@@ -88,9 +92,24 @@ mainmenu () {
 	case $(echo "$answer" | tr A-Z a-z) in
 		1)	full;;
 		2)	minimal;;
+		3)	multiusermenu;;
 		q)	quitscript;;
 		*)	badoption;;
 	esac
+}
+multiusermenu () {
+	clear
+ 	tput setaf 3
+	echo "==========================================="
+	echo " --- Instructions for Multi-User Setup ---"
+	echo "==========================================="
+	tput setaf 9
+	echo "If you want to set up multiple user accounts on your computer, please run the script again on each new user account. Make sure that additional user accounts are set to Administrator. You can set accounts back to Standard after completing setup."
+	tput sgr0
+	echo "Hit any key to return to the main menu:"
+	IFS=""
+	read -sN1 answer
+	mainmenu
 }
 quitscript () {
 	tput sgr0
@@ -135,7 +154,7 @@ full () {
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
-	sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app chrome-gnome-shell lame gpart neofetch ffmpeg httrack tree telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs gnome-books krita gnome-clocks gimp htop transmission curl git handbrake-gui minetest obs-studio discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip shotcut google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager
+	sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app chrome-gnome-shell lame gpart neofetch ffmpeg httrack tree telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs gnome-books krita gnome-clocks gimp htop transmission curl git handbrake-gui minetest obs-studio discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip shotcut google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben epiphany
 	javamenu
 	sudo dnf update -y --refresh
 	sudo dnf autoremove -y
@@ -144,6 +163,10 @@ full () {
 	flatpak install -y flathub org.musescore.MuseScore
 	flatpak install -y flathub com.mojang.Minecraft
 	flatpak install -y flathub org.inkscape.Inkscape
+	flatpak install -y flathub ar.xjuan.Cambalache
+	flatpak install -y flathub com.github.jeromerobert.pdfarranger
+	flatpak install -y flathub com.github.muriloventuroso.pdftricks
+	flatpak install -y flathub org.kde.okular
 	flatpak update -y
 	flatpak uninstall -y --unused --delete-data
 	pip install pip youtube-dl yt-dlp speedtest-cli -U
@@ -168,9 +191,12 @@ minimal () {
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
-	sudo dnf install -y alien pavucontrol rhythmbox rhythmbox-alternative-toolbar gparted p7zip* gnome-tweaks gnome-extensions-app gpart ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins* pip google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects cpu-x gucharmap gnome-power-manager
+	sudo dnf install -y alien pavucontrol rhythmbox rhythmbox-alternative-toolbar gparted p7zip* gnome-tweaks gnome-extensions-app gpart ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins* pip google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects cpu-x gucharmap gnome-power-manager bijiben epiphany
 	sudo dnf update -y --refresh
 	sudo dnf autoremove -y
+	flatpak install -y flathub com.github.jeromerobert.pdfarranger
+	flatpak install -y flathub com.github.muriloventuroso.pdftricks
+	flatpak install -y flathub org.kde.okular
 	flatpak update -y
 	flatpak uninstall -y --unused --delete-data
 	pip install pip speedtest-cli -U
@@ -182,7 +208,7 @@ javamenu () {
 	echo "============================"
 	echo " --- Java Configuration ---"
 	echo "============================"
-	echo "On the next screen, you will be prompted to select the default Java version. Please select the option with java-latest-openjdk."
+	echo "On the next screen, you will be prompted to select the default Java version. Please select the option with java-latest-openjdk. This is usually option 2."
 	tput sgr0
 	echo "Press any key to continue"
 	IFS=""
