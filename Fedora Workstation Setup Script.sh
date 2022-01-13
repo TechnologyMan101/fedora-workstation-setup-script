@@ -58,7 +58,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 4.13 ---"
+	echo " --- Fedora Workstation Setup Script 4.14 ---"
 	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 35"
 	tput setaf 10
@@ -151,6 +151,7 @@ full () {
 	sudo dnf install -y rpmfusion-free-release-tainted
 	sudo dnf install -y libdvdcss
 	sudo dnf install -y rpmfusion-nonfree-release-tainted
+	sudo dnf mark -y install libfreeaptx pipewire-codec-aptx
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
@@ -188,6 +189,7 @@ minimal () {
 	sudo dnf install -y rpmfusion-free-release-tainted
 	sudo dnf install -y libdvdcss
 	sudo dnf install -y rpmfusion-nonfree-release-tainted
+	sudo dnf mark -y install libfreeaptx pipewire-codec-aptx
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
