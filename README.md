@@ -4,7 +4,7 @@ Bash script to set up a fresh install of Fedora Workstation.
 
 # Documentation
 
-Version 4.14
+Version 4.15
 
 Supported Fedora Workstation Versions: 35
 
@@ -34,14 +34,21 @@ Add shortcut to open “gnome-system-monitor” with “Super+Backspace”
 Refer to image for media controls on desktop keyboards.
 
 
-# GNOME Extensions (from [extensions.gnome.org](https://extensions.gnome.org/)):
+# GNOME Extensions:
 
 This is to be done after running the script!!!
 
-- [Caffeine](https://extensions.gnome.org/extension/517/caffeine/)
-- [Lock Keys](https://extensions.gnome.org/extension/36/lock-keys/)
-- [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/)
-- [Transparent Top Bar](https://extensions.gnome.org/extension/1708/transparent-top-bar/)
+Install using Extension Manager. 
+
+- Caffeine - eon
+- Lock Keys – kazimieras.vaina
+- AppIndicator and KStatusNotifierItem Support - 3v1n0
+- Transparent Top Bar - zhanghai
+
+
+# Other:
+
+Add `export WEBKIT_FORCE_SANDBOX=0`to `~/.bashrc`. This fixes issues with printing on applications that use WebKit. For the package set that this script provides, the application affected is GNOME Web. 
 
 
 # Run Script:
