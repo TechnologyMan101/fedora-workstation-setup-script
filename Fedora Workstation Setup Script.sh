@@ -58,7 +58,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 4.14 ---"
+	echo " --- Fedora Workstation Setup Script 4.15 ---"
 	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 35"
 	tput setaf 10
@@ -168,6 +168,10 @@ full () {
 	flatpak install -y flathub com.github.jeromerobert.pdfarranger
 	flatpak install -y flathub com.github.muriloventuroso.pdftricks
 	flatpak install -y flathub org.kde.okular
+	flatpak install -y flathub com.github.flxzt.rnote
+	flatpak install -y flathub com.github.tchx84.Flatseal
+	flatpak install -y flathub com.mattjakeman.ExtensionManager
+	flatpak install -y flathub org.gnome.TextEditor
 	flatpak update -y
 	flatpak uninstall -y --unused --delete-data
 	pip install pip youtube-dl yt-dlp speedtest-cli -U
@@ -199,6 +203,9 @@ minimal () {
 	flatpak install -y flathub com.github.jeromerobert.pdfarranger
 	flatpak install -y flathub com.github.muriloventuroso.pdftricks
 	flatpak install -y flathub org.kde.okular
+	flatpak install -y flathub com.github.tchx84.Flatseal
+	flatpak install -y flathub com.mattjakeman.ExtensionManager
+	flatpak install -y flathub org.gnome.TextEditor
 	flatpak update -y
 	flatpak uninstall -y --unused --delete-data
 	pip install pip speedtest-cli -U
