@@ -43,7 +43,7 @@ Install using Extension Manager.
 - Caffeine – eon
 - Lock Keys – kazimieras.vaina
 - AppIndicator and KStatusNotifierItem Support – 3v1n0
-- Rounded Window Corners – yilozt
+- Rounded Window Corners – yilozt (change Border Radius to 8.0 in extension settings)
 
 
 # Run Script:
