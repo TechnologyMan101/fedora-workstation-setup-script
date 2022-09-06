@@ -45,6 +45,7 @@ Install using Extension Manager.
 - AppIndicator and KStatusNotifierItem Support – 3v1n0
 - Rounded Window Corners – yilozt (change Border Radius to 8.0 in extension settings)
 - Alphabetical App Grid – stuarthayhurst
+- Night Theme Switcher – rmnvgr (enable Switch GTK Theme and set to adw-gtk3 variants)
 
 
 # Run Script:
