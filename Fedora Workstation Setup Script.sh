@@ -272,6 +272,20 @@ installadwtheme () {
 	runcheck gsettings set org.gnome.desktop.interface color-scheme 'default'
 }
 echo "Loaded installadwtheme."
+exfatwarning () {
+	clear
+ 	tput setaf 3
+	echo "==========================="
+	echo " --- Important Warning ---"
+	echo "==========================="
+	tput setaf 9
+	echo "I have noticed Fedora corrupting exFAT partition when performing large write operations. Please proceed with caution when managing files on exFAT"
+	tput sgr0
+	echo "Press any key to continue"
+	IFS=""
+	read -sN1 answer
+}
+echo "Loaded exfatwarning."
 runcheck () {
 	IFS=$'\n'
 	command="$*"
@@ -316,6 +330,7 @@ sleep 1.5
 while true
 do
 	checkcompatibility
+	exfatwarning
 	mainmenu
 done
 # End of Main Script
