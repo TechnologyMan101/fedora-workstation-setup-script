@@ -26,8 +26,8 @@ checkcompatibility () {
 	fi
 	isworkstation="true"
 
-	# Check for 36
-	if ! echo $VERSION_ID | grep -qi "36"
+	# Check for 37
+	if ! echo $VERSION_ID | grep -qi "37"
 	then
 		sysreqfail
 	fi
@@ -42,7 +42,7 @@ echo "Loaded checkcompatibility."
 sysreqfail () {
 	clear
 	tput setaf 9
-	echo "System requirements not met. This script supports the x86_64 version of Fedora 36 Workstation!!!"
+	echo "System requirements not met. This script supports the x86_64 version of Fedora 37 Workstation!!!"
 	tput setaf 3
 	echo "If your error is not caused by a wrong Fedora version or OS architecture, please check to see if I have published a script for your system."
 	tput setaf 10
@@ -65,9 +65,9 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "============================================="
-	echo " --- Fedora Workstation Setup Script 5.0 ---"
+	echo " --- Fedora Workstation Setup Script 5.2 ---"
 	echo "============================================="
-	echo "Supported Fedora Workstation Versions (x86_64): 36"
+	echo "Supported Fedora Workstation Versions (x86_64): 37"
 	tput setaf 10
 	echo "Your current distro is $PRETTY_NAME."
 	echo "Your current Fedora version is $VERSION_ID."
@@ -167,7 +167,7 @@ full () {
 	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	runcheck sudo dnf install -y "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
-	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app chrome-gnome-shell lame gpart neofetch ffmpeg httrack tree telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs gnome-books krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest obs-studio discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip shotcut google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip
+	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app lame gpart neofetch ffmpeg httrack tree telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest obs-studio discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip shotcut google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip
 	javamenu
 	runcheck sudo dnf update -y --refresh
 	runcheck sudo dnf autoremove -y
@@ -187,7 +187,7 @@ full () {
 	runcheck flatpak install -y flathub app.drey.EarTag
 	runcheck flatpak update -y
 	runcheck flatpak uninstall -y --unused --delete-data
-	runcheck pip install pip wheel youtube-dl yt-dlp speedtest-cli mangadex-downloader pillow py7zr animdl -U
+	runcheck pip install pip wheel youtube-dl yt-dlp speedtest-cli mangadex-downloader[optional] animdl -U
     runcheck pip cache purge
 	echo "Adding current user to cdrom group..."
 	runcheck sudo usermod -aG cdrom $USER
@@ -255,7 +255,7 @@ javamenu () {
 echo "Loaded javamenu."
 autofontinstall () {
 	echo "Installing the Essential Font Pack..."
-	runcheck sudo wget -O "/tmp/fontinstall.zip" "https://github.com/TechnologyMan101/script-extras/releases/download/20220822-0943/Essential.Font.Pack.zip"
+	runcheck sudo wget -O "/tmp/fontinstall.zip" "https://github.com/TechnologyMan101/script-extras/releases/download/20221012-1521/Essential.Font.Pack.zip"
 	runcheck sudo unzip -o "/tmp/fontinstall.zip" -d "/usr/share/fonts"
 	runcheck sudo chmod -R 755 "/usr/share/fonts/Essential Font Pack"
 	runcheck sudo rm "/tmp/fontinstall.zip"
