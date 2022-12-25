@@ -39,6 +39,35 @@ checkcompatibility () {
 	fi
 }
 echo "Loaded checkcompatibility."
+checkfreespace () {
+	min_free_space=40
+	free_space=$(df -h / | awk 'NR==2{print $4}' | sed 's/[^0-9.]//g')
+	if [ $(echo "$free_space < $min_free_space" | bc) -eq 1 ]; then
+		spacewarning
+	fi
+}
+echo "Loaded checkfreespace."
+spacewarning () {
+	clear
+	tput setaf 9
+	echo "The script has detected that there is less than 40 GB of storage available on the root volume."
+	tput setaf 3
+	echo "For an ideal experience, it is recommended that the root volume has at least 40 GB of space available."
+	tput setaf 10
+	echo "Your current free space: $free_space GB"
+	tput setaf 3
+	echo "Press <return> to continue at your own risk (for re-running the script)"
+	echo "Press any other key to quit"
+	tput sgr0
+	echo "Enter your selection:"
+	IFS=""
+	read -sN1 answer
+	case $(echo "$answer" | tr A-Z a-z) in
+		"")	mainmenu;;
+		*)	quitscript;;
+	esac
+}
+echo "Loaded spacewarning."
 sysreqfail () {
 	clear
 	tput setaf 9
@@ -65,14 +94,16 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "============================================="
-	echo " --- Fedora Workstation Setup Script 5.2 ---"
+	echo " --- Fedora Workstation Setup Script 5.3 ---"
 	echo "============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 37"
+	echo "Recommended Free Space: 40 GB"
 	tput setaf 10
 	echo "Your current distro is $PRETTY_NAME."
 	echo "Your current Fedora version is $VERSION_ID."
 	echo "Fedora Edition is Workstation: $isworkstation"
 	echo "Your current OS architecture is $kernelarch."
+	echo "Your current free space: $free_space GB"
 tput setaf 3
 	echo "Script may prompt you or ask you for your password once in a while. Please monitor your computer until the script is done."
 	echo "This script will show terminal output. This is normal."
@@ -185,6 +216,7 @@ full () {
 	runcheck flatpak install -y flathub com.mattjakeman.ExtensionManager
 	runcheck flatpak install -y flathub com.wps.Office
 	runcheck flatpak install -y flathub app.drey.EarTag
+	runcheck flatpak install -y flathub com.calibre_ebook.calibre
 	runcheck flatpak update -y
 	runcheck flatpak uninstall -y --unused --delete-data
 	runcheck pip install pip wheel youtube-dl yt-dlp speedtest-cli mangadex-downloader[optional] animdl -U
@@ -330,6 +362,7 @@ sleep 1.5
 while true
 do
 	checkcompatibility
+	checkfreespace
 	exfatwarning
 	mainmenu
 done
