@@ -4,9 +4,11 @@ Bash script to set up a fresh install of Fedora Workstation.
 
 # Documentation
 
-Version 5.2
+Version 5.3
 
 Supported Fedora Workstation Versions: 37
+
+Recommended Free Space: 40 GB
 
 **Please Run Script After Following Instructions Here**
 
