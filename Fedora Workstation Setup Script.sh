@@ -8,26 +8,30 @@ tput setaf 10
 checkcompatibility () {
 	# Set variables
 	. /etc/os-release
-	isfedora="false"
+	ispopos="false"
 	kernelarch=$(uname -m)
 	
 	# Check distro
-	if ! echo $PRETTY_NAME | grep -qi "Fedora"
+	if ! lsb_release -d | grep -qi '^Description:[[:space:]]*Pop!_OS *[0-9][0-9]*\.'
 	then
 		sysreqfail
 	fi
-	isfedora="true"
-	isworkstation="false"
+	ispopos="true"
 	
-	# Check workstation
-	if ! echo $PRETTY_NAME | grep -qi "Workstation"
-	then
-		sysreqfail
-	fi
-	isworkstation="true"
+	# Function cluster for identifying codenames
+	case "$UBUNTU_CODENAME" in
+		"bionic")	poposverno="18.04 LTS";;
+		"focal")	poposverno="20.04 LTS";;
+		"groovy")	poposverno="20.10";;
+		"hirsute")	poposverno="21.04";;
+		"impish")	poposverno="21.10";;
+        "jammy")    poposverno="22.04 LTS";;
+		*)	poposverno="UNDEFINED, Contact maintainer";;
+	esac
+	# End cluster
 
-	# Check for 37
-	if ! echo $VERSION_ID | grep -qi "37"
+	# Check for 22.04 LTS
+	if ! grep -qi "jammy" /etc/os-release
 	then
 		sysreqfail
 	fi
@@ -71,16 +75,15 @@ echo "Loaded spacewarning."
 sysreqfail () {
 	clear
 	tput setaf 9
-	echo "System requirements not met. This script supports the x86_64 version of Fedora 37 Workstation!!!"
+	echo "System requirements not met. This script supports x86_64 versions of Pop!_OS 22.04 LTS!!!"
 	tput setaf 3
-	echo "If your error is not caused by a wrong Fedora version or OS architecture, please check to see if I have published a script for your system."
+	echo "If your error is not caused by a wrong Pop!_OS version or OS architecture, please check to see if I have published a script for your system."
 	tput setaf 10
 	echo "Your current distro is $PRETTY_NAME."
-	# Display Fedora codename if Fedora
-	if echo $isfedora | grep -qi "true"
+	# Display Pop!_OS codename if Pop!_OS
+	if echo $ispopos | grep -qi "true"
 	then
-		echo "Your current Fedora version is $VERSION_ID."
-		echo "Fedora Edition is Workstation: $isworkstation"
+		echo "Your current Pop!_OS version is $poposverno (Codename: $UBUNTU_CODENAME)."
 	fi
 	echo "Your current OS architecture is $kernelarch."
 	tput sgr0
@@ -93,18 +96,17 @@ echo "Loaded sysreqfail."
 mainmenu () {
 	clear
  	tput setaf 3
-	echo "============================================="
-	echo " --- Fedora Workstation Setup Script 5.4 ---"
-	echo "============================================="
-	echo "Supported Fedora Workstation Versions (x86_64): 37"
+	echo "=================================="
+	echo " --- Pop!_OS Setup Script 5.8 ---"
+	echo "=================================="
+	echo "Supported Pop!_OS Versions (x86_64): 22.04 LTS"
 	echo "Recommended Free Space: 40 GB"
 	tput setaf 10
 	echo "Your current distro is $PRETTY_NAME."
-	echo "Your current Fedora version is $VERSION_ID."
-	echo "Fedora Edition is Workstation: $isworkstation"
+	echo "Your current Pop!_OS version is $poposverno (Codename: $UBUNTU_CODENAME)."
 	echo "Your current OS architecture is $kernelarch."
 	echo "Your current free space: $free_space GB"
-tput setaf 3
+	tput setaf 3
 	echo "Script may prompt you or ask you for your password once in a while. Please monitor your computer until the script is done."
 	echo "This script will show terminal output. This is normal."
 	echo "You can open this script in a text editor to view all functions."
@@ -185,26 +187,26 @@ full () {
 	echo "Full Install/All User Packages..."
 	tput sgr0
 	sleep 3
-	clear
-	runcheck sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-	runcheck sudo dnf groupupdate -y core
-	runcheck sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-	runcheck sudo dnf groupupdate -y sound-and-video
-	runcheck sudo dnf install -y rpmfusion-free-release-tainted
-	runcheck sudo dnf install -y libdvdcss
-	runcheck sudo dnf install -y rpmfusion-nonfree-release-tainted
-	runcheck sudo dnf mark -y install libfreeaptx pipewire-codec-aptx
-	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
-	runcheck sudo dnf install -y "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
-	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app lame gpart neofetch ffmpeg httrack tree telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest obs-studio discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip shotcut google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip
-	javamenu
-	runcheck sudo dnf update -y --refresh
-	runcheck sudo dnf autoremove -y
-	runcheck flatpak install -y flathub com.system76.Popsicle
+    clear
+	common
+	runcheck sudo apt install -y ubuntu-restricted-extras gnome-backgrounds ubuntu-gnome-wallpapers system76-wallpapers synaptic remmina bleachbit frozen-bubble musescore3 asunder brasero k3b pavucontrol rhythmbox shotwell solaar gnome-boxes gparted vlc p7zip-full p7zip-rar gnome-tweaks lame gpart grub2-common neofetch network-manager-openvpn-gnome ffmpeg webhttrack lsp-plugins tree telegram-desktop gufw easytag android-tools-adb android-tools-fastboot gnome-sound-recorder cheese nikwi supertux dconf-editor deja-dup gnome-todo gnome-sushi unoconv ffmpegthumbs fonts-cantarell krita gnome-clocks gimp htop curl git handbrake gtk-3-examples menulibre nautilus-admin python3-pip libreoffice-style-sukapura cpu-x hardinfo bijiben mcomix gscan2pdf supertuxkart unzip gsmartcontrol
+	runcheck sudo apt install -y libc6-i386 libx11-6:i386 libegl1-mesa:i386 zlib1g:i386 libstdc++6:i386 libgl1-mesa-dri:i386 libasound2:i386
+	runcheck sudo apt install -y default-jdk
+	java -version
+	sleep 3
+	runcheck sudo add-apt-repository -y ppa:mkusb/ppa
+	runcheck sudo apt install -y mkusb mkusb-nox usb-pack-efi gparted
+	runcheck sudo add-apt-repository -y ppa:obsproject/obs-studio
+	runcheck sudo apt install -y obs-studio
+	runcheck sudo apt update -y
+	runcheck sudo apt install -y --only-upgrade obs-studio
+	runcheck sudo apt update -y
+	runcheck sudo apt full-upgrade -y --allow-downgrades
+	runcheck sudo apt autoremove -y --purge
+	runcheck sudo apt autoclean -y
 	runcheck flatpak install -y flathub org.audacityteam.Audacity
-	runcheck flatpak install -y flathub org.musescore.MuseScore
-	runcheck flatpak install -y flathub com.mojang.Minecraft
+	runcheck flatpak install -y flathub org.shotcut.Shotcut
+	runcheck flatpak install -y flathub net.minetest.Minetest
 	runcheck flatpak install -y flathub org.inkscape.Inkscape
 	runcheck flatpak install -y flathub ar.xjuan.Cambalache
 	runcheck flatpak install -y flathub com.github.jeromerobert.pdfarranger
@@ -213,19 +215,24 @@ full () {
 	runcheck flatpak install -y flathub com.github.flxzt.rnote
 	runcheck flatpak install -y flathub com.github.tchx84.Flatseal
 	runcheck flatpak install -y flathub com.mattjakeman.ExtensionManager
+	runcheck flatpak install -y flathub com.github.wwmm.easyeffects
 	runcheck flatpak install -y flathub com.wps.Office
 	runcheck flatpak install -y flathub app.drey.EarTag
+	runcheck flatpak install -y flathub de.haeckerfelix.Fragments
 	runcheck flatpak install -y flathub com.calibre_ebook.calibre
-	runcheck flatpak update -y
+	runcheck flatpak install -y flathub org.kde.kid3
 	runcheck flatpak uninstall -y --unused --delete-data
-	runcheck pip install pip wheel youtube-dl yt-dlp speedtest-cli mangadex-downloader[optional] animdl -U
-    runcheck pip cache purge
+	runcheck pip3 install pip wheel youtube-dl yt-dlp speedtest-cli mangadex-downloader[optional] animdl -U
+	runcheck pip3 cache purge
 	echo "Adding current user to cdrom group..."
 	runcheck sudo usermod -aG cdrom $USER
-	echo "Adding current user to vboxusers group..."
-	runcheck sudo usermod -aG vboxusers $USER
+	echo "Patching LSP icons..."
+    # The next command makes sure the directory exists. It is normal for it to fail. Runcheck is not needed here. 
+	mkdir ~/.local/share/applications
+	runcheck echo "[Desktop Entry]
+	Hidden=true" > /tmp/1
+	runcheck find /usr -name "*lsp_plug*desktop" 2>/dev/null | cut -f 5 -d '/' | xargs -I {} cp /tmp/1 ~/.local/share/applications/{}
 	autofontinstall
-	installadwtheme
 	finish
 }
 echo "Loaded full."
@@ -236,54 +243,40 @@ minimal () {
 	tput sgr0
 	sleep 3
 	clear
-	runcheck sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-	runcheck sudo dnf groupupdate -y core
-	runcheck sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-	runcheck sudo dnf groupupdate -y sound-and-video
-	runcheck sudo dnf install -y rpmfusion-free-release-tainted
-	runcheck sudo dnf install -y libdvdcss
-	runcheck sudo dnf install -y rpmfusion-nonfree-release-tainted
-	runcheck sudo dnf mark -y install libfreeaptx pipewire-codec-aptx
-	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
-	runcheck sudo dnf install -y "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
-	runcheck sudo dnf install -y alien pavucontrol rhythmbox rhythmbox-alternative-toolbar gparted p7zip* gnome-tweaks gnome-extensions-app gpart ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins* pip google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 gscan2pdf unzip
-	runcheck sudo dnf update -y --refresh
-	runcheck sudo dnf autoremove -y
+	common
+	runcheck sudo apt install -y ubuntu-restricted-extras synaptic pavucontrol rhythmbox gparted p7zip-full p7zip-rar gnome-tweaks gpart network-manager-openvpn-gnome ffmpeg gufw dconf-editor deja-dup gnome-sushi unoconv ffmpegthumbs fonts-cantarell htop curl git gtk-3-examples menulibre nautilus-admin python3-pip libreoffice-style-sukapura cpu-x hardinfo bijiben gscan2pdf unzip gsmartcontrol
+	runcheck sudo apt install -y libc6-i386 libx11-6:i386 libegl1-mesa:i386 zlib1g:i386 libstdc++6:i386 libgl1-mesa-dri:i386 libasound2:i386
+	runcheck sudo apt update -y
+	runcheck sudo apt full-upgrade -y --allow-downgrades
+	runcheck sudo apt autoremove -y --purge
+	runcheck sudo apt autoclean -y
 	runcheck flatpak install -y flathub com.github.jeromerobert.pdfarranger
 	runcheck flatpak install -y flathub com.github.muriloventuroso.pdftricks
 	runcheck flatpak install -y flathub org.kde.okular
 	runcheck flatpak install -y flathub com.github.tchx84.Flatseal
 	runcheck flatpak install -y flathub com.mattjakeman.ExtensionManager
+	runcheck flatpak install -y flathub com.github.wwmm.easyeffects
 	runcheck flatpak install -y flathub com.wps.Office
 	runcheck flatpak update -y
 	runcheck flatpak uninstall -y --unused --delete-data
-	runcheck pip install pip wheel speedtest-cli -U
-    runcheck pip cache purge
-    autofontinstall
-    installadwtheme
+	runcheck pip3 install pip wheel speedtest-cli -U
+    runcheck pip3 cache purge
+	echo "Patching LSP icons..."
+    # The next command makes sure the directory exists. It is normal for it to fail. 
+	mkdir ~/.local/share/applications
+    runcheck echo "[Desktop Entry]
+	Hidden=true" > /tmp/1
+	runcheck find /usr -name "*lsp_plug*desktop" 2>/dev/null | cut -f 5 -d '/' | xargs -I {} cp /tmp/1 ~/.local/share/applications/{}
+	autofontinstall
 	finish
 }
 echo "Loaded minimal."
-javamenu () {
-	clear
- 	tput setaf 3
-	echo "============================"
-	echo " --- Java Configuration ---"
-	echo "============================"
-	echo "On the next screen, you will be prompted to select the default Java version. Please select the option with java-latest-openjdk. This is usually option 2."
-	tput sgr0
-	echo "Press any key to continue"
-	IFS=""
-	read -sN1 answer
-	clear
-	runcheck sudo alternatives --config java
-	clear
-	java --version
-	sleep 3
-	clear
+common () {
+	runcheck sudo apt update -y
+	runcheck sudo apt install -y gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-plugins-good libavcodec-extra gstreamer1.0-libav chromium-codecs-ffmpeg-extra libdvd-pkg libheif1 libquicktime2 heif-gdk-pixbuf
+	runcheck sudo dpkg-reconfigure libdvd-pkg
 }
-echo "Loaded javamenu."
+echo "Loaded common."
 autofontinstall () {
 	echo "Installing the Essential Font Pack..."
 	runcheck sudo wget -O "/tmp/fontinstall.zip" "https://github.com/TechnologyMan101/script-extras/releases/download/20221012-1521/Essential.Font.Pack.zip"
@@ -292,31 +285,6 @@ autofontinstall () {
 	runcheck sudo rm "/tmp/fontinstall.zip"
 }
 echo "Loaded autofontinstall."
-installadwtheme () {
-	echo "Installing the Adwaita theme set..."
-	runcheck flatpak install -y flathub com.github.GradienceTeam.Gradience
-	runcheck sudo dnf copr enable -y nickavem/adw-gtk3
-	runcheck sudo dnf install -y adw-gtk3
-	runcheck flatpak install -y org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
-	# Set default light theme
-	runcheck gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
-	runcheck gsettings set org.gnome.desktop.interface color-scheme 'default'
-}
-echo "Loaded installadwtheme."
-exfatwarning () {
-	clear
- 	tput setaf 3
-	echo "==========================="
-	echo " --- Important Warning ---"
-	echo "==========================="
-	tput setaf 9
-	echo "I have noticed Fedora corrupting exFAT partition when performing large write operations. Please proceed with caution when managing files on exFAT"
-	tput sgr0
-	echo "Press any key to continue"
-	IFS=""
-	read -sN1 answer
-}
-echo "Loaded exfatwarning."
 runcheck () {
 	IFS=$'\n'
 	command="$*"
@@ -362,7 +330,6 @@ while true
 do
 	checkcompatibility
 	checkfreespace
-	exfatwarning
 	mainmenu
 done
 # End of Main Script
