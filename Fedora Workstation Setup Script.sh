@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "============================================="
-	echo " --- Fedora Workstation Setup Script 5.5 ---"
+	echo " --- Fedora Workstation Setup Script 5.6 ---"
 	echo "============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 37"
 	echo "Recommended Free Space: 40 GB"
@@ -217,6 +217,7 @@ full () {
 	runcheck flatpak install -y flathub app.drey.EarTag
 	runcheck flatpak install -y flathub com.calibre_ebook.calibre
 	runcheck flatpak install -y flathub org.kde.kid3
+	runcheck flatpak install flathub -y org.kde.subtitlecomposer
 	runcheck flatpak update -y
 	runcheck flatpak uninstall -y --unused --delete-data
 	runcheck pip install pip wheel youtube-dl yt-dlp speedtest-cli mangadex-downloader[optional] animdl -U
