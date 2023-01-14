@@ -4,7 +4,7 @@ Bash script to set up a fresh install of Fedora Workstation.
 
 # Documentation
 
-Version 5.6
+Version 5.7
 
 Supported Fedora Workstation Versions: 37
 
@@ -47,7 +47,7 @@ Install using Extension Manager.
 - AppIndicator and KStatusNotifierItem Support – 3v1n0
 - Rounded Window Corners – yilozt (change Border Radius to 8.0 and change Corner Smoothing to 0.0)
 - Alphabetical App Grid – stuarthayhurst
-- Night Theme Switcher – rmnvgr (enable Switch GTK Theme and set to adw-gtk3 variants)
+- Legacy (GTK3) Theme Scheme Auto Switcher – mukul29
 
 
 # Run Script:
