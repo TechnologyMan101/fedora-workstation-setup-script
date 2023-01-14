@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "============================================="
-	echo " --- Fedora Workstation Setup Script 5.6 ---"
+	echo " --- Fedora Workstation Setup Script 5.7 ---"
 	echo "============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 37"
 	echo "Recommended Free Space: 40 GB"
@@ -197,7 +197,7 @@ full () {
 	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	runcheck sudo dnf install -y "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
-	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app lame gpart neofetch ffmpeg httrack tree telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest obs-studio discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip shotcut google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip gsmartcontrol
+	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app lame gpart neofetch ffmpeg httrack tree telegram-desktop easytag android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip shotcut google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip gsmartcontrol dvdstyler
 	javamenu
 	runcheck sudo dnf update -y --refresh
 	runcheck sudo dnf autoremove -y
@@ -217,7 +217,8 @@ full () {
 	runcheck flatpak install -y flathub app.drey.EarTag
 	runcheck flatpak install -y flathub com.calibre_ebook.calibre
 	runcheck flatpak install -y flathub org.kde.kid3
-	runcheck flatpak install flathub -y org.kde.subtitlecomposer
+	runcheck flatpak install -y flathub org.kde.subtitlecomposer
+	runcheck flatpak install -y flathub com.obsproject.Studio
 	runcheck flatpak update -y
 	runcheck flatpak uninstall -y --unused --delete-data
 	runcheck pip install pip wheel youtube-dl yt-dlp speedtest-cli mangadex-downloader[optional] animdl -U
@@ -228,6 +229,7 @@ full () {
 	runcheck sudo usermod -aG vboxusers $USER
 	autofontinstall
 	installadwtheme
+	installmesafreeworld
 	finish
 }
 echo "Loaded full."
@@ -264,6 +266,7 @@ minimal () {
     runcheck pip cache purge
     autofontinstall
     installadwtheme
+    installmesafreeworld
 	finish
 }
 echo "Loaded minimal."
@@ -305,20 +308,11 @@ installadwtheme () {
 	runcheck gsettings set org.gnome.desktop.interface color-scheme 'default'
 }
 echo "Loaded installadwtheme."
-exfatwarning () {
-	clear
- 	tput setaf 3
-	echo "==========================="
-	echo " --- Important Warning ---"
-	echo "==========================="
-	tput setaf 9
-	echo "I have noticed Fedora corrupting exFAT partition when performing large write operations. Please proceed with caution when managing files on exFAT"
-	tput sgr0
-	echo "Press any key to continue"
-	IFS=""
-	read -sN1 answer
+installmesafreeworld () {
+	echo "Swapping mesa-va-drivers with freeworld from RPMFusion"
+	runcheck sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
 }
-echo "Loaded exfatwarning."
+echo "Loaded installmesafreeworld."
 runcheck () {
 	IFS=$'\n'
 	command="$*"
@@ -364,7 +358,6 @@ while true
 do
 	checkcompatibility
 	checkfreespace
-	exfatwarning
 	mainmenu
 done
 # End of Main Script
