@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "============================================="
-	echo " --- Fedora Workstation Setup Script 5.8 ---"
+	echo " --- Fedora Workstation Setup Script 5.9 ---"
 	echo "============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 37"
 	echo "Recommended Free Space: 40 GB"
@@ -310,8 +310,9 @@ installadwtheme () {
 }
 echo "Loaded installadwtheme."
 installmesafreeworld () {
-	echo "Swapping mesa-va-drivers with freeworld from RPMFusion"
+	echo "Swapping mesa with mesa-freeworld from RPMFusion"
 	runcheck sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
+	runcheck sudo dnf swap -y mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
 }
 echo "Loaded installmesafreeworld."
 runcheck () {
