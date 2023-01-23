@@ -4,7 +4,7 @@ Bash script to set up a fresh install of Fedora Workstation.
 
 # Documentation
 
-Version 5.9.2
+Version 5.9.3
 
 Supported Fedora Workstation Versions: 37
 
@@ -48,7 +48,7 @@ Install using Extension Manager.
 - Alphabetical App Grid – stuarthayhurst
 - Legacy (GTK3) Theme Scheme Auto Switcher – mukul29
 
-Enable using Extension Manager. 
+Enable (install if not available) using Extension Manager. 
 - AppIndicator and KStatusNotifierItem Support – 3v1n0
 
 
