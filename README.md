@@ -58,7 +58,7 @@ Mark the script as executable by changing it in file properties or running `chmo
 
 
 # Media Shortcuts Image:
-![Error](https://raw.githubusercontent.com/TechnologyMan101/fedora-workstation-setup-script/main/Media%20Shortcuts%20for%20Desktop%20Keyboards.png)
+![Error](https://github.com/TechnologyMan101/fedora-workstation-setup-script/blob/main/Media%20Shortcuts%20for%20Desktop%20Keyboards.png?raw=true)
 
 
 # VM Users
