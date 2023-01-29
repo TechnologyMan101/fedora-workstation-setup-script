@@ -93,9 +93,9 @@ echo "Loaded sysreqfail."
 mainmenu () {
 	clear
  	tput setaf 3
-	echo "==============================================="
-	echo " --- Fedora Workstation Setup Script 5.9.3 ---"
-	echo "==============================================="
+	echo "=============================================="
+	echo " --- Fedora Workstation Setup Script 5.10 ---"
+	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 37"
 	echo "Recommended Free Space: 40 GB"
 	tput setaf 10
@@ -230,7 +230,7 @@ full () {
 	runcheck sudo usermod -aG vboxusers $USER
 	autofontinstall
 	installadwtheme
-	installmesafreeworld
+	installmiscdrivers
 	finish
 }
 echo "Loaded full."
@@ -267,7 +267,7 @@ minimal () {
     runcheck pip cache purge
     autofontinstall
     installadwtheme
-    installmesafreeworld
+    installmiscdrivers
 	finish
 }
 echo "Loaded minimal."
@@ -309,12 +309,16 @@ installadwtheme () {
 	runcheck gsettings set org.gnome.desktop.interface color-scheme 'default'
 }
 echo "Loaded installadwtheme."
-installmesafreeworld () {
-	echo "Swapping mesa with mesa-freeworld from RPMFusion"
+installmiscdrivers () {
+	echo "Installing miscellaneous drivers from RPMFusion..."
 	runcheck sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
 	runcheck sudo dnf swap -y mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
+	runcheck sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
+	runcheck sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
+	runcheck sudo dnf install -y intel-media-driver libva-intel-driver nvidia-vaapi-driver
+	runcheck sudo dnf --repo=rpmfusion-nonfree-tainted install "*-firmware"
 }
-echo "Loaded installmesafreeworld."
+echo "Loaded installmiscdrivers."
 runcheck () {
 	IFS=$'\n'
 	command="$*"
