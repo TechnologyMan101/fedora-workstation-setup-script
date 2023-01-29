@@ -4,7 +4,7 @@ Bash script to set up a fresh install of Fedora Workstation.
 
 # Documentation
 
-Version 5.9.3
+Version 5.10
 
 Supported Fedora Workstation Versions: 37
 
@@ -12,11 +12,12 @@ Recommended Free Space: 40 GB
 
 **Please Run Script After Following Instructions Here**
 
+<ins>_**Make sure to enable Third-Party Repositories during initial setup!!!**_</ins>
+
 <ins>_**Make sure to update your system using the system’s software center and reboot before performing any tasks here and running the script. Failing to do so may result in severe breakage!!!**_</ins>
 
 **The Extras folder also contains other tools you may want.**
 
-**Make sure to enable Third-Party Repositories during initial setup!!!**
 
 Please install .rpm files and files using other types of installation formats using files manually (if you have them).
 
@@ -64,3 +65,8 @@ Mark the script as executable by changing it in file properties or running `chmo
 # VM Users
 
 Minimal Install is recommended. VM Tools can be found at https://mega.nz/folder/sBwwxBTR#zf6d3UaJYnNGl5tXaN63ag in Extras or at https://github.com/TechnologyMan101/script-extras/releases.
+
+
+# Other Notes
+
+NVIDIA users must install the proprietary driver separately, as well as switch to the GNOME on X11 session prior to logging in by using the session menu located in the bottom right corner of the screen on the login screen. 
