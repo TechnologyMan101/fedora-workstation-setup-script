@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 5.10 ---"
+	echo " --- Fedora Workstation Setup Script 5.11 ---"
 	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 37"
 	echo "Recommended Free Space: 40 GB"
@@ -213,7 +213,7 @@ full () {
 	runcheck flatpak install -y flathub com.github.flxzt.rnote
 	runcheck flatpak install -y flathub com.github.tchx84.Flatseal
 	runcheck flatpak install -y flathub com.mattjakeman.ExtensionManager
-	runcheck flatpak install -y flathub com.wps.Office
+	runcheck flatpak install -y flathub org.onlyoffice.desktopeditors
 	runcheck flatpak install -y flathub app.drey.EarTag
 	runcheck flatpak install -y flathub com.calibre_ebook.calibre
 	runcheck flatpak install -y flathub org.kde.kid3
@@ -260,7 +260,7 @@ minimal () {
 	runcheck flatpak install -y flathub org.kde.okular
 	runcheck flatpak install -y flathub com.github.tchx84.Flatseal
 	runcheck flatpak install -y flathub com.mattjakeman.ExtensionManager
-	runcheck flatpak install -y flathub com.wps.Office
+	runcheck flatpak install -y flathub org.onlyoffice.desktopeditors
 	runcheck flatpak update -y
 	runcheck flatpak uninstall -y --unused --delete-data
 	runcheck pip install pip wheel speedtest-cli -U
@@ -310,13 +310,13 @@ installadwtheme () {
 }
 echo "Loaded installadwtheme."
 installmiscdrivers () {
-	echo "Installing miscellaneous drivers from RPMFusion..."
+	echo "Installing miscellaneous drivers from RPM Fusion..."
 	runcheck sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
 	runcheck sudo dnf swap -y mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
 	runcheck sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
 	runcheck sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
 	runcheck sudo dnf install -y intel-media-driver libva-intel-driver nvidia-vaapi-driver
-	runcheck sudo dnf --repo=rpmfusion-nonfree-tainted install "*-firmware"
+	runcheck sudo dnf --repo=rpmfusion-nonfree-tainted install -y "*-firmware"
 }
 echo "Loaded installmiscdrivers."
 runcheck () {
