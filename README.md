@@ -4,7 +4,7 @@ Bash script to set up a fresh install of Fedora Workstation.
 
 # Documentation
 
-Version 5.11
+Version 5.12
 
 Supported Fedora Workstation Versions: 37
 
