@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 5.12 ---"
+	echo " --- Fedora Workstation Setup Script 5.13 ---"
 	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 37"
 	echo "Recommended Free Space: 40 GB"
@@ -215,7 +215,7 @@ full () {
 	runcheck flatpak install -y flathub org.onlyoffice.desktopeditors
 	runcheck flatpak install -y flathub app.drey.EarTag
 	runcheck flatpak install -y flathub com.calibre_ebook.calibre
-	runcheck flatpak install -y flathub org.kde.kid3
+	runcheck flatpak install -y flathub org.musicbrainz.Picard
 	runcheck flatpak install -y flathub org.kde.subtitlecomposer
 	runcheck flatpak install -y flathub com.obsproject.Studio
 	runcheck flatpak install -y flathub org.pitivi.Pitivi
@@ -228,6 +228,7 @@ full () {
 	runcheck sudo usermod -aG cdrom $USER
 	echo "Adding current user to vboxusers group..."
 	runcheck sudo usermod -aG vboxusers $USER
+	appendbashrc1
 	autofontinstall
 	installadwtheme
 	installmiscdrivers
@@ -265,6 +266,7 @@ minimal () {
 	runcheck flatpak uninstall -y --unused --delete-data
 	runcheck pip install pip wheel speedtest-cli -U
     runcheck pip cache purge
+    appendbashrc2
     autofontinstall
     installadwtheme
     installmiscdrivers
@@ -290,9 +292,42 @@ javamenu () {
 	clear
 }
 echo "Loaded javamenu."
+appendbashrcinfo () {
+	clear
+ 	tput setaf 3
+	echo "===================================="
+	echo " --- Information on CLI Aliases ---"
+	echo "===================================="
+	echo "The 'sysupdate' alias will be added to your user profile. This is an alias that updates the computer more thoroughly. It is recommended to run this every week. This alias does not handle major system upgrades. To use this alias, run 'sysupdate' in a terminal."
+	tput sgr0
+	echo "Press any key to continue"
+	IFS=""
+	read -sN1 answer
+	clear
+}
+echo "Loaded appendbashrcinfo."
+appendbashrc1 () {
+	appendbashrcinfo
+	echo "Adding sysupdate alias and neofetch to .bashrc..."
+	runcheck sed -i '/sysupdate/d' ~/.bashrc
+	runcheck echo 'alias sysupdate="sudo dnf update -y --refresh && sudo dnf autoremove -y && flatpak update -y && flatpak uninstall -y --unused --delete-data && pip install pip wheel youtube-dl yt-dlp speedtest-cli mangadex-downloader[optional] animdl -U && pip cache purge"' >> ~/.bashrc
+	runcheck sed -i '/neofetch/d' ~/.bashrc
+	runcheck echo 'neofetch' >> ~/.bashrc
+}
+echo "Loaded appendbashrc1."
+appendbashrc2 () {
+	appendbashrcinfo
+	echo "Adding sysupdate alias and neofetch to .bashrc..."
+	runcheck sed -i '/sysupdate/d' ~/.bashrc
+	runcheck echo 'alias sysupdate="sudo dnf update -y --refresh && sudo dnf autoremove -y && flatpak update -y && flatpak uninstall -y --unused --delete-data && pip install pip wheel speedtest-cli -U && pip cache purge"' >> ~/.bashrc
+	runcheck sed -i '/neofetch/d' ~/.bashrc
+	runcheck echo 'neofetch' >> ~/.bashrc
+}
+echo "Loaded appendbashrc2."
 autofontinstall () {
 	echo "Installing the Essential Font Pack..."
 	runcheck sudo wget -O "/tmp/fontinstall.zip" "https://github.com/TechnologyMan101/script-extras/releases/download/20221012-1521/Essential.Font.Pack.zip"
+	sudo rm -rf "/usr/share/fonts/Essential Font Pack"
 	runcheck sudo unzip -o "/tmp/fontinstall.zip" -d "/usr/share/fonts"
 	runcheck sudo chmod -R 755 "/usr/share/fonts/Essential Font Pack"
 	runcheck sudo rm "/tmp/fontinstall.zip"
