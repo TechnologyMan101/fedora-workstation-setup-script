@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 5.13 ---"
+	echo " --- Fedora Workstation Setup Script 5.14 ---"
 	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 37"
 	echo "Recommended Free Space: 40 GB"
@@ -220,6 +220,7 @@ full () {
 	runcheck flatpak install -y flathub com.obsproject.Studio
 	runcheck flatpak install -y flathub org.pitivi.Pitivi
 	runcheck flatpak install -y flathub org.telegram.desktop
+	runcheck flatpak install -y flathub net.lutris.Lutris
 	runcheck flatpak update -y
 	runcheck flatpak uninstall -y --unused --delete-data
 	runcheck pip install pip wheel youtube-dl yt-dlp speedtest-cli mangadex-downloader[optional] animdl -U
@@ -253,7 +254,7 @@ minimal () {
 	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	runcheck sudo dnf install -y "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
-	runcheck sudo dnf install -y alien pavucontrol rhythmbox rhythmbox-alternative-toolbar gparted p7zip* gnome-tweaks gnome-extensions-app gpart ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins* pip google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 gscan2pdf unzip gsmartcontrol
+	runcheck sudo dnf install -y alien pavucontrol rhythmbox rhythmbox-alternative-toolbar gparted p7zip* gnome-tweaks gnome-extensions-app gpart neofetch ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins* pip google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 gscan2pdf unzip gsmartcontrol
 	runcheck sudo dnf update -y --refresh
 	runcheck sudo dnf autoremove -y
 	runcheck flatpak install -y flathub com.github.jeromerobert.pdfarranger
