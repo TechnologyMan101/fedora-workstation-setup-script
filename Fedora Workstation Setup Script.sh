@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 5.15 ---"
+	echo " --- Fedora Workstation Setup Script 5.16 ---"
 	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 37"
 	echo "Recommended Free Space: 40 GB"
@@ -230,6 +230,8 @@ full () {
 	runcheck sudo usermod -aG cdrom $USER
 	echo "Adding current user to vboxusers group..."
 	runcheck sudo usermod -aG vboxusers $USER
+	echo "Removing Solaar autostart file..."
+	sudo rm /etc/xdg/autostart/solaar.desktop
 	appendbashrc1
 	autofontinstall
 	installadwtheme
