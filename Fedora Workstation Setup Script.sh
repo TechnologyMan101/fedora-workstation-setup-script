@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 5.16 ---"
+	echo " --- Fedora Workstation Setup Script 5.17 ---"
 	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 37"
 	echo "Recommended Free Space: 40 GB"
@@ -350,10 +350,6 @@ installadwtheme () {
 echo "Loaded installadwtheme."
 installmiscdrivers () {
 	echo "Installing miscellaneous drivers from RPM Fusion..."
-	runcheck sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
-	runcheck sudo dnf swap -y mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
-	runcheck sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
-	runcheck sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
 	runcheck sudo dnf install -y intel-media-driver libva-intel-driver nvidia-vaapi-driver
 	runcheck sudo dnf --repo=rpmfusion-nonfree-tainted install -y "*-firmware"
 }
