@@ -26,8 +26,8 @@ checkcompatibility () {
 	fi
 	isworkstation="true"
 
-	# Check for 37
-	if ! echo $VERSION_ID | grep -qi "37"
+	# Check for 38
+	if ! echo $VERSION_ID | grep -qi "38"
 	then
 		sysreqfail
 	fi
@@ -71,7 +71,7 @@ echo "Loaded spacewarning."
 sysreqfail () {
 	clear
 	tput setaf 9
-	echo "System requirements not met. This script supports the x86_64 version of Fedora 37 Workstation!!!"
+	echo "System requirements not met. This script supports the x86_64 version of Fedora 38 Workstation!!!"
 	tput setaf 3
 	echo "If your error is not caused by a wrong Fedora version or OS architecture, please check to see if I have published a script for your system."
 	tput setaf 10
@@ -94,9 +94,9 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 5.17 ---"
+	echo " --- Fedora Workstation Setup Script 5.18 ---"
 	echo "=============================================="
-	echo "Supported Fedora Workstation Versions (x86_64): 37"
+	echo "Supported Fedora Workstation Versions (x86_64): 38"
 	echo "Recommended Free Space: 40 GB"
 	tput setaf 10
 	echo "Your current distro is $PRETTY_NAME."
@@ -188,6 +188,7 @@ full () {
 	clear
 	runcheck sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 	runcheck sudo dnf groupupdate -y core
+	runcheck sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
 	runcheck sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 	runcheck sudo dnf groupupdate -y sound-and-video
 	runcheck sudo dnf install -y rpmfusion-free-release-tainted
@@ -197,7 +198,7 @@ full () {
 	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	runcheck sudo dnf install -y "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
-	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox rhythmbox-alternative-toolbar shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app lame gpart neofetch ffmpeg httrack tree android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip gsmartcontrol dvdstyler
+	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app lame gpart neofetch ffmpeg httrack tree android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip gsmartcontrol dvdstyler
 	javamenu
 	runcheck sudo dnf update -y --refresh
 	runcheck sudo dnf autoremove -y
@@ -248,6 +249,7 @@ minimal () {
 	clear
 	runcheck sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 	runcheck sudo dnf groupupdate -y core
+	runcheck sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
 	runcheck sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 	runcheck sudo dnf groupupdate -y sound-and-video
 	runcheck sudo dnf install -y rpmfusion-free-release-tainted
@@ -257,7 +259,7 @@ minimal () {
 	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	runcheck sudo dnf install -y "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
-	runcheck sudo dnf install -y alien pavucontrol rhythmbox rhythmbox-alternative-toolbar gparted p7zip* gnome-tweaks gnome-extensions-app gpart neofetch ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins* pip google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 gscan2pdf unzip gsmartcontrol
+	runcheck sudo dnf install -y alien pavucontrol rhythmbox gparted p7zip* gnome-tweaks gnome-extensions-app gpart neofetch ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins* pip google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 gscan2pdf unzip gsmartcontrol
 	runcheck sudo dnf update -y --refresh
 	runcheck sudo dnf autoremove -y
 	runcheck flatpak install -y flathub com.github.jeromerobert.pdfarranger
