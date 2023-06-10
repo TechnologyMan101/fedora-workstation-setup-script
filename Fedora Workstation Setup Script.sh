@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 5.18 ---"
+	echo " --- Fedora Workstation Setup Script 5.20 ---"
 	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 38"
 	echo "Recommended Free Space: 40 GB"
@@ -342,8 +342,7 @@ echo "Loaded autofontinstall."
 installadwtheme () {
 	echo "Installing the Adwaita theme set..."
 	runcheck flatpak install -y flathub com.github.GradienceTeam.Gradience
-	runcheck sudo dnf copr enable -y nickavem/adw-gtk3
-	runcheck sudo dnf install -y adw-gtk3
+	runcheck sudo dnf install -y adw-gtk3-theme
 	runcheck flatpak install -y org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
 	# Set default light theme
 	runcheck gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
