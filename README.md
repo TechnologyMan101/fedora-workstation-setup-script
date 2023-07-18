@@ -48,7 +48,7 @@ Install using Extension Manager.
 - Rounded Window Corners – yilozt
 - Alphabetical App Grid – stuarthayhurst
 - Legacy (GTK3) Theme Scheme Auto Switcher – mukul29
-- Vitals - corecoding
+- Vitals – corecoding
 
 Enable (install if not available) using Extension Manager. 
 - AppIndicator and KStatusNotifierItem Support – 3v1n0
