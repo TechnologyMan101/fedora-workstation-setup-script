@@ -4,7 +4,7 @@ Bash script to set up a fresh install of Fedora Workstation.
 
 # Documentation
 
-Version 5.22
+Version 5.23
 
 Supported Fedora Workstation Versions: 38
 
@@ -45,7 +45,7 @@ Install using Extension Manager.
 
 - Caffeine – eon (disable Notifications)
 - Lock Keys – kazimieras.vaina (set Indicator Style to Show/Hide)
-- Rounded Window Corners – yilozt
+- Rounded Window Corners – Luo Yi
 - Alphabetical App Grid – stuarthayhurst
 - Legacy (GTK3) Theme Scheme Auto Switcher – mukul29
 - Vitals – corecoding
