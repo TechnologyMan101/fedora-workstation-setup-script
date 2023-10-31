@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 5.24 ---"
+	echo " --- Fedora Workstation Setup Script 5.25 ---"
 	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 38"
 	echo "Recommended Free Space: 40 GB"
@@ -225,7 +225,7 @@ full () {
 	runcheck flatpak install -y flathub org.prismlauncher.PrismLauncher
 	runcheck flatpak update -y
 	runcheck flatpak uninstall -y --unused --delete-data
-	runcheck pip install pip wheel yt-dlp speedtest-cli mangadex-downloader[optional] animdl -U
+	runcheck pip install pip wheel yt-dlp speedtest-cli mangadex-downloader[optional] animdl git+https://github.com/nathom/streamrip.git@dev -U
     runcheck pip cache purge
 	echo "Adding current user to cdrom group..."
 	runcheck sudo usermod -aG cdrom $USER
