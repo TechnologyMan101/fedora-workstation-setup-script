@@ -45,7 +45,6 @@ Install using Extension Manager.
 
 - Caffeine – eon (disable Notifications)
 - Lock Keys – kazimieras.vaina (set Indicator Style to Show/Hide)
-- Rounded Window Corners – Luo Yi
 - Alphabetical App Grid – stuarthayhurst
 - Legacy (GTK3) Theme Scheme Auto Switcher – mukul29
 - Vitals – corecoding
