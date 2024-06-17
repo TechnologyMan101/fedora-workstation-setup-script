@@ -4,7 +4,7 @@ Bash script to set up a fresh install of Fedora Workstation.
 
 # Documentation
 
-Version 5.31
+Version 5.32
 
 Supported Fedora Workstation Versions: 40
 
@@ -48,7 +48,9 @@ Install using Extension Manager.
 - Alphabetical App Grid – stuarthayhurst
 - Legacy (GTK3) Theme Scheme Auto Switcher – mukul29
 - Vitals – corecoding
-- Gtk4 Desktop Icons NG (DING) - smedius
+- Gtk4 Desktop Icons NG (DING) – smedius
+- Blur my Shell – aunetx
+- Custom Accent Colors – demiskp
 
 Enable (install if not available) using Extension Manager. 
 - AppIndicator and KStatusNotifierItem Support – 3v1n0
