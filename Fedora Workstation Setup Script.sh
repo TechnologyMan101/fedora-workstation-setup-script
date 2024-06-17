@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 5.31 ---"
+	echo " --- Fedora Workstation Setup Script 5.32 ---"
 	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 40"
 	echo "Recommended Free Space: 40 GB"
