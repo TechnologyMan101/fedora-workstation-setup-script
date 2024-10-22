@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 5.33 ---"
+	echo " --- Fedora Workstation Setup Script 5.34 ---"
 	echo "=============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 40"
 	echo "Recommended Free Space: 40 GB"
@@ -236,7 +236,7 @@ full () {
 	runcheck flatpak uninstall -y --unused --delete-data
 	runcheck python3 -m ensurepip
 	runcheck python3 -m pip install pip wheel -U
-	runcheck python3 -m pip install --pre yt-dlp -U
+	runcheck python3 -m pip install --pre yt-dlp[default] -U
     runcheck python3 -m pip cache purge
 	echo "Adding current user to cdrom group..."
 	runcheck sudo usermod -aG cdrom $USER
@@ -336,7 +336,7 @@ appendbashrc1 () {
 	appendbashrcinfo
 	echo "Adding sysupdate alias and neofetch to .bashrc..."
 	runcheck sed -i '/sysupdate/d' ~/.bashrc
-	runcheck echo 'alias sysupdate="sudo dnf update -y --refresh && sudo dnf autoremove -y && flatpak update -y && flatpak uninstall -y --unused --delete-data && python3 -m pip install pip wheel -U && python3 -m pip install --pre yt-dlp -U && python3 -m pip cache purge"' >> ~/.bashrc
+	runcheck echo 'alias sysupdate="sudo dnf update -y --refresh && sudo dnf autoremove -y && flatpak update -y && flatpak uninstall -y --unused --delete-data && python3 -m pip install pip wheel -U && python3 -m pip install --pre yt-dlp[default] -U && python3 -m pip cache purge"' >> ~/.bashrc
 	runcheck sed -i '/neofetch/d' ~/.bashrc
 	runcheck echo 'neofetch' >> ~/.bashrc
 }
