@@ -4,7 +4,7 @@ Bash script to set up a fresh install of Fedora Workstation.
 
 # Documentation
 
-Version 5.35
+Version 5.35.1
 
 Supported Fedora Workstation Versions: 41
 
@@ -30,7 +30,7 @@ Change “Settings” to “Super+I”
 
 Change “Toggle Fullscreen Mode” to “Super+F11”
 
-Add shortcut to open “gnome-terminal” with “Ctrl+Alt+T”
+Add shortcut to open “ptyxis” with “Ctrl+Alt+T”
 
 Add shortcut to open “gnome-system-monitor” with “Super+Backspace”
 
