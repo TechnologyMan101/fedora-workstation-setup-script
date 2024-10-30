@@ -4,9 +4,9 @@ Bash script to set up a fresh install of Fedora Workstation.
 
 # Documentation
 
-Version 5.34
+Version 5.35
 
-Supported Fedora Workstation Versions: 40
+Supported Fedora Workstation Versions: 41
 
 Recommended Free Space: 40 GB
 
@@ -50,7 +50,6 @@ Install using Extension Manager.
 - Vitals – corecoding
 - Gtk4 Desktop Icons NG (DING) – smedius
 - Blur my Shell – aunetx
-- Custom Accent Colors – demiskp
 - Tiling Shell – domferr
 
 Enable (install if not available) using Extension Manager. 
