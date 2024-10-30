@@ -93,9 +93,9 @@ echo "Loaded sysreqfail."
 mainmenu () {
 	clear
  	tput setaf 3
-	echo "=============================================="
-	echo " --- Fedora Workstation Setup Script 5.35 ---"
-	echo "=============================================="
+	echo "================================================"
+	echo " --- Fedora Workstation Setup Script 5.35.1 ---"
+	echo "================================================"
 	echo "Supported Fedora Workstation Versions (x86_64): 41"
 	echo "Recommended Free Space: 40 GB"
 	tput setaf 10
