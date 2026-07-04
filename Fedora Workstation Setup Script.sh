@@ -26,8 +26,8 @@ checkcompatibility () {
 	fi
 	isworkstation="true"
 
-	# Check for 42
-	if ! echo $VERSION_ID | grep -qi "42"
+	# Check for 44
+	if ! echo $VERSION_ID | grep -qi "44"
 	then
 		sysreqfail
 	fi
@@ -71,7 +71,7 @@ echo "Loaded spacewarning."
 sysreqfail () {
 	clear
 	tput setaf 9
-	echo "System requirements not met. This script supports the x86_64 version of Fedora 42 Workstation!!!"
+	echo "System requirements not met. This script supports the x86_64 version of Fedora 44 Workstation!!!"
 	tput setaf 3
 	echo "If your error is not caused by a wrong Fedora version or OS architecture, please check to see if I have published a script for your system."
 	tput setaf 10
@@ -94,9 +94,9 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "==============================================="
-	echo " --- Fedora Workstation Setup Script 5.36 ---"
+	echo " --- Fedora Workstation Setup Script 5.38 ---"
 	echo "==============================================="
-	echo "Supported Fedora Workstation Versions (x86_64): 42"
+	echo "Supported Fedora Workstation Versions (x86_64): 44"
 	echo "Recommended Free Space: 40 GB"
 	tput setaf 10
 	echo "Your current distro is $PRETTY_NAME."
@@ -194,6 +194,7 @@ full () {
 	runcheck sudo dnf config-manager -y setopt rpmfusion-nonfree-nvidia-driver.enabled=1
 	runcheck sudo dnf config-manager -y setopt rpmfusion-nonfree-steam.enabled=1
 	runcheck sudo dnf update -y @core
+	runcheck sudo dnf install -y rpmfusion-\*-appstream-data
 	runcheck sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
 	runcheck sudo dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 	runcheck sudo dnf install -y rpmfusion-free-release-tainted
@@ -201,13 +202,14 @@ full () {
 	runcheck sudo dnf install -y rpmfusion-nonfree-release-tainted
 	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
-	runcheck sudo dnf install -y "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
-	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox shotwell solaar gnome-boxes gparted vlc p7zip* gnome-tweaks gnome-extensions-app lame gpart fastfetch fastfetch-bash-completion ffmpeg httrack tree android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest discord menulibre libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip python3 google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip gsmartcontrol dvdstyler firewall-config aria2 hugin vcdimager gnome-shell-extension-appindicator
+	runcheck sudo rpm --replacepkgs --nodigest -i "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
+	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox shotwell solaar gnome-boxes gparted vlc 7zip p7zip* gnome-tweaks gnome-extensions-app lame gpart fastfetch fastfetch-bash-completion ffmpeg httrack tree android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest discord libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip python3 google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip gsmartcontrol firewall-config aria2 hugin vcdimager gnome-shell-extension-appindicator
 	javamenu
 	runcheck sudo dnf copr enable -y g3tchoo/prismlauncher
 	runcheck sudo dnf install -y prismlauncher
 	runcheck sudo dnf update -y --refresh
 	runcheck sudo dnf autoremove -y
+	runcheck flatpak install -y flathub page.codeberg.libre_menu_editor.LibreMenuEditor
 	runcheck flatpak install -y flathub org.audacityteam.Audacity
 	runcheck flatpak install -y flathub org.musescore.MuseScore
 	runcheck flatpak install -y flathub org.inkscape.Inkscape
@@ -264,6 +266,7 @@ minimal () {
 	runcheck sudo dnf config-manager -y setopt rpmfusion-nonfree-nvidia-driver.enabled=1
 	runcheck sudo dnf config-manager -y setopt rpmfusion-nonfree-steam.enabled=1
 	runcheck sudo dnf update -y @core
+	runcheck sudo dnf install -y rpmfusion-\*-appstream-data
 	runcheck sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
 	runcheck sudo dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 	runcheck sudo dnf install -y rpmfusion-free-release-tainted
@@ -271,10 +274,11 @@ minimal () {
 	runcheck sudo dnf install -y rpmfusion-nonfree-release-tainted
 	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
-	runcheck sudo dnf install -y "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
-	runcheck sudo dnf install -y alien pavucontrol rhythmbox gparted p7zip* gnome-tweaks gnome-extensions-app gpart fastfetch fastfetch-bash-completion ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git menulibre gstreamer-plugins* gstreamer1-plugins* pip python3 google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 gscan2pdf unzip gsmartcontrol firewall-config aria2 hugin gnome-shell-extension-appindicator
+	runcheck sudo rpm --replacepkgs --nodigest -i "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
+	runcheck sudo dnf install -y alien pavucontrol rhythmbox gparted 7zip p7zip* gnome-tweaks gnome-extensions-app gpart fastfetch fastfetch-bash-completion ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git gstreamer-plugins* gstreamer1-plugins* pip python3 google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 gscan2pdf unzip gsmartcontrol firewall-config aria2 hugin gnome-shell-extension-appindicator
 	runcheck sudo dnf update -y --refresh
 	runcheck sudo dnf autoremove -y
+	runcheck flatpak install -y flathub page.codeberg.libre_menu_editor.LibreMenuEditor
 	runcheck flatpak install -y flathub com.github.jeromerobert.pdfarranger
 	runcheck flatpak install -y flathub org.kde.okular
 	runcheck flatpak install -y flathub com.github.tchx84.Flatseal
@@ -366,7 +370,8 @@ installadwtheme () {
 echo "Loaded installadwtheme."
 installmiscdrivers () {
 	echo "Installing miscellaneous drivers from RPM Fusion..."
-	runcheck sudo dnf install -y intel-media-driver libva-intel-driver nvidia-vaapi-driver
+	runcheck sudo dnf install -y intel-media-driver libva-intel-driver libva-nvidia-driver.{i686,x86_64}
+	runcheck sudo dnf install -y mesa-va-drivers-freeworld mesa-va-drivers-freeworld.i686
 	runcheck sudo dnf --repo=rpmfusion-nonfree-tainted install -y "*-firmware"
 }
 echo "Loaded installmiscdrivers."
