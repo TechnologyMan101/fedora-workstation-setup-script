@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "==============================================="
-	echo " --- Fedora Workstation Setup Script 5.39 ---"
+	echo " --- Fedora Workstation Setup Script 5.40 ---"
 	echo "==============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 44"
 	echo "Recommended Free Space: 40 GB"
@@ -203,7 +203,7 @@ full () {
 	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	runcheck sudo rpm --replacepkgs --nodigest -i "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
-	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox shotwell solaar gnome-boxes gparted vlc 7zip p7zip* gnome-tweaks gnome-extensions-app lame gpart fastfetch fastfetch-bash-completion ffmpeg httrack tree android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest discord libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip python3 google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip gsmartcontrol firewall-config aria2 hugin vcdimager gnome-shell-extension-appindicator
+	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox shotwell solaar gnome-boxes gparted vlc 7zip p7zip* gnome-tweaks gnome-extensions-app lame gpart fastfetch fastfetch-bash-completion ffmpeg httrack tree android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest discord libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip python3 google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip gsmartcontrol firewall-config aria2 hugin vcdimager gnome-shell-extension-appindicator lm_sensors
 	javamenu
 	runcheck sudo dnf copr enable -y g3tchoo/prismlauncher
 	runcheck sudo dnf install -y prismlauncher
@@ -275,7 +275,7 @@ minimal () {
 	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
 	runcheck sudo rpm --replacepkgs --nodigest -i "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
-	runcheck sudo dnf install -y alien pavucontrol rhythmbox gparted 7zip p7zip* gnome-tweaks gnome-extensions-app gpart fastfetch fastfetch-bash-completion ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git gstreamer-plugins* gstreamer1-plugins* pip python3 google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 gscan2pdf unzip gsmartcontrol firewall-config aria2 hugin gnome-shell-extension-appindicator
+	runcheck sudo dnf install -y alien pavucontrol rhythmbox gparted 7zip p7zip* gnome-tweaks gnome-extensions-app gpart fastfetch fastfetch-bash-completion ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git gstreamer-plugins* gstreamer1-plugins* pip python3 google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 gscan2pdf unzip gsmartcontrol firewall-config aria2 hugin gnome-shell-extension-appindicator lm_sensors
 	runcheck sudo dnf update -y --refresh
 	runcheck sudo dnf autoremove -y
 	runcheck flatpak install -y flathub page.codeberg.libre_menu_editor.LibreMenuEditor
