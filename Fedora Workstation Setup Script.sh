@@ -94,7 +94,7 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "==============================================="
-	echo " --- Fedora Workstation Setup Script 5.41 ---"
+	echo " --- Fedora Workstation Setup Script 5.42 ---"
 	echo "==============================================="
 	echo "Supported Fedora Workstation Versions (x86_64): 44"
 	echo "Recommended Free Space: 40 GB"
@@ -352,11 +352,13 @@ appendbashrc2 () {
 echo "Loaded appendbashrc2."
 autofontinstall () {
 	echo "Installing the Essential Font Pack..."
-	runcheck sudo wget -O "/tmp/fontinstall.zip" "https://github.com/TechnologyMan101/script-extras/releases/download/20240122-2030/Essential.Font.Pack.zip"
+	runcheck sudo wget -O "/var/tmp/fontinstall.7z" "https://github.com/TechnologyMan101/script-extras/releases/download/20261026-0241/Essential.Font.Pack.7z"
 	sudo rm -rf "/usr/share/fonts/Essential Font Pack"
-	runcheck sudo unzip -o "/tmp/fontinstall.zip" -d "/usr/share/fonts"
-	runcheck sudo chmod -R 755 "/usr/share/fonts/Essential Font Pack"
-	runcheck sudo rm "/tmp/fontinstall.zip"
+	runcheck sudo 7z x -y "/var/tmp/fontinstall.7z" -o"/usr/share/fonts"
+	runcheck sudo find "/usr/share/fonts/Essential Font Pack" -type d -exec chmod 755 {} +
+	runcheck sudo find "/usr/share/fonts/Essential Font Pack" -type f -exec chmod 644 {} +
+	runcheck sudo fc-cache -fv
+	runcheck sudo rm "/var/tmp/fontinstall.7z"
 }
 echo "Loaded autofontinstall."
 installadwtheme () {
