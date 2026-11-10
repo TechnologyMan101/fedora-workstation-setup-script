@@ -26,8 +26,8 @@ checkcompatibility () {
 	fi
 	isworkstation="true"
 
-	# Check for 44
-	if ! echo $VERSION_ID | grep -qi "44"
+	# Check for 45
+	if ! echo $VERSION_ID | grep -qi "45"
 	then
 		sysreqfail
 	fi
@@ -71,7 +71,7 @@ echo "Loaded spacewarning."
 sysreqfail () {
 	clear
 	tput setaf 9
-	echo "System requirements not met. This script supports the x86_64 version of Fedora 44 Workstation!!!"
+	echo "System requirements not met. This script supports the x86_64 version of Fedora 45 Workstation!!!"
 	tput setaf 3
 	echo "If your error is not caused by a wrong Fedora version or OS architecture, please check to see if I have published a script for your system."
 	tput setaf 10
@@ -94,9 +94,9 @@ mainmenu () {
 	clear
  	tput setaf 3
 	echo "==============================================="
-	echo " --- Fedora Workstation Setup Script 5.42 ---"
+	echo " --- Fedora Workstation Setup Script 5.43 ---"
 	echo "==============================================="
-	echo "Supported Fedora Workstation Versions (x86_64): 44"
+	echo "Supported Fedora Workstation Versions (x86_64): 45"
 	echo "Recommended Free Space: 40 GB"
 	tput setaf 10
 	echo "Your current distro is $PRETTY_NAME."
@@ -190,7 +190,6 @@ full () {
 	runcheck sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 	runcheck sudo dnf config-manager -y setopt fedora-cisco-openh264.enabled=1
 	runcheck sudo dnf config-manager -y setopt google-chrome.enabled=1
-	runcheck sudo dnf config-manager -y setopt copr:copr.fedorainfracloud.org:phracek:PyCharm.enabled=1
 	runcheck sudo dnf config-manager -y setopt rpmfusion-nonfree-nvidia-driver.enabled=1
 	runcheck sudo dnf config-manager -y setopt rpmfusion-nonfree-steam.enabled=1
 	runcheck sudo dnf update -y @core
@@ -202,8 +201,8 @@ full () {
 	runcheck sudo dnf install -y rpmfusion-nonfree-release-tainted
 	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
-	runcheck sudo rpm --replacepkgs --nodigest -i "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
-	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox shotwell solaar gnome-boxes gparted vlc 7zip p7zip* gnome-tweaks gnome-extensions-app lame gpart fastfetch fastfetch-bash-completion ffmpeg httrack tree android-tools gnome-sound-recorder cheese supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest discord libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip python3 google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip gsmartcontrol firewall-config aria2 hugin vcdimager gnome-shell-extension-appindicator lm_sensors
+	runcheck sudo rpm --replacepkgs --nodigest --nosignature -i "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
+	runcheck sudo dnf install -y alien remmina bleachbit frozen-bubble asunder brasero k3b libburn cdrskin pavucontrol easyeffects rhythmbox shotwell solaar gnome-boxes gparted vlc 7zip p7zip* gnome-tweaks gnome-extensions-app lame gpart fastfetch fastfetch-bash-completion ffmpeg httrack tree android-tools gnome-sound-recorder supertux dconf-editor deja-dup gnome-todo sushi unoconv ffmpegthumbs krita gnome-clocks gimp htop fragments curl git handbrake-gui minetest discord libreoffice-draw java-latest-openjdk gstreamer-plugins* gstreamer1-plugins* pip python3 google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 VirtualBox gscan2pdf supertuxkart unzip gsmartcontrol dvdstyler firewall-config aria2 hugin vcdimager gnome-shell-extension-appindicator lm_sensors
 	javamenu
 	runcheck sudo dnf copr enable -y g3tchoo/prismlauncher
 	runcheck sudo dnf install -y prismlauncher
@@ -262,7 +261,6 @@ minimal () {
 	runcheck sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 	runcheck sudo dnf config-manager -y setopt fedora-cisco-openh264.enabled=1
 	runcheck sudo dnf config-manager -y setopt google-chrome.enable=1
-	runcheck sudo dnf config-manager -y setopt copr:copr.fedorainfracloud.org:phracek:PyCharm.enabled=1
 	runcheck sudo dnf config-manager -y setopt rpmfusion-nonfree-nvidia-driver.enabled=1
 	runcheck sudo dnf config-manager -y setopt rpmfusion-nonfree-steam.enabled=1
 	runcheck sudo dnf update -y @core
@@ -274,7 +272,7 @@ minimal () {
 	runcheck sudo dnf install -y rpmfusion-nonfree-release-tainted
 	runcheck flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	runcheck sudo dnf install -y curl cabextract xorg-x11-font-utils fontconfig
-	runcheck sudo rpm --replacepkgs --nodigest -i "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
+	runcheck sudo rpm --replacepkgs --nodigest --nosignature -i "https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
 	runcheck sudo dnf install -y alien pavucontrol rhythmbox gparted 7zip p7zip* gnome-tweaks gnome-extensions-app gpart fastfetch fastfetch-bash-completion ffmpeg dconf-editor deja-dup sushi unoconv ffmpegthumbs htop curl git gstreamer-plugins* gstreamer1-plugins* pip python3 google-chrome-stable kernel-headers kernel-devel gcc glibc-headers make dkms file-roller file-roller-nautilus easyeffects cpu-x gucharmap gnome-power-manager bijiben libheif libquicktime gdk-pixbuf2 mcomix3 gscan2pdf unzip gsmartcontrol firewall-config aria2 hugin gnome-shell-extension-appindicator lm_sensors
 	runcheck sudo dnf update -y --refresh
 	runcheck sudo dnf autoremove -y
